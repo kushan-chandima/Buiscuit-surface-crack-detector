@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+env-biscuits-crack/
+
+# Data and model files
+runs/
+*.pt
+*.onnx
+*.h5
+*.ckpt
+
+# Dataset (optional, if large)
+data/
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
