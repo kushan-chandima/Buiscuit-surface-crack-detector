@@ -216,7 +216,8 @@ class CrackDetectorUI(QMainWindow):
             return
         # Run YOLOv8 segmentation
         results = self.model.predict(frame, device=self.device, verbose=False)
-        annotated = results[0].plot()
+        # Display ONLY masks (hide bounding boxes) to fulfill the user's segmentation requirement
+        annotated = results[0].plot(boxes=False, masks=True)
         # Convert to QImage
         rgb_image = cv2.cvtColor(annotated, cv2.COLOR_BGR2RGB)
         
