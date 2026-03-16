@@ -47,9 +47,9 @@ model.predict(source=0, show=True)  # 0 = default webcam
 
 ## Real-Time UI Usage
 
-You can run the user-friendly UI for live crack detection using either the PyTorch (Ultralytics) or ONNX version:
+You can run the user-friendly UI for live crack detection:
 
-### PyTorch/Ultralytics UI (Recommended)
+### PyTorch/Ultralytics UI
 ```
 python app/main.py
 ```
@@ -67,7 +67,6 @@ python app/main_onnx.py
 
 ## Troubleshooting
 - If you get DLL errors with PyTorch, ensure you have the latest Microsoft Visual C++ Redistributable (x64) installed and only one version present.
-- If using ONNX UI, mask overlay may need adjustment depending on your camera resolution and model export settings.
 - For missing packages, activate your environment and run `pip install -r requirements.txt`.
 - For more help, open an issue or contact the maintainer.
 
