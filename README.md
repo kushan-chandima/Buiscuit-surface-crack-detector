@@ -36,6 +36,16 @@ from ultralytics import YOLO
 model = YOLO('runs/segment/biscuit_yolov8n_seg/weights/best.pt')
 results = model.predict('path/to/image.jpg', save=True)
 ```
+#### Model Performance (Final Epoch - 50)
+- **Object Detection (Box)**:
+    - **Precision**: 0.985
+    - **Recall**: 0.818
+    - **mAP50**: 0.881
+- **Segmentation (Mask)**:
+    - **Precision**: 0.845
+    - **Recall**: 0.636
+    - **mAP50**: 0.727
+
 - This will save prediction images with crack masks in the `runs/segment/predict/` folder.
 
 #### Predict on Video (Live Camera)
