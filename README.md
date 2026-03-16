@@ -76,7 +76,6 @@ Pull requests are welcome! Please open an issue first to discuss major changes.
 - `train_yolov8_seg.py`: Training script
 - `env-test-biscuit/`: Virtual environment
 - `app/main.py`: PyQt5 Real-time UI Pro for live crack detection
-- `test_both.py`, `test_pyqt5.py`, `test_ultralytics.py`: Diagnostic tools
 
 ## License
 MIT
