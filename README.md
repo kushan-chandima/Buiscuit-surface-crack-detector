@@ -44,9 +44,32 @@ model.predict(source=0, show=True)  # 0 = default webcam
 ```
 - Use `source=1`, `2`, etc. for other connected cameras.
 
-### Real-Time UI (Planned)
-- A PyQt5-based UI will allow you to select the video source, view live predictions, and highlight cracks in red.
-- (To be implemented)
+
+## Real-Time UI Usage
+
+You can run the user-friendly UI for live crack detection using either the PyTorch (Ultralytics) or ONNX version:
+
+### PyTorch/Ultralytics UI (Recommended)
+```
+python app/main.py
+```
+- Select your camera from the dropdown.
+- Click **Start** to begin live detection. Cracks will be highlighted in red on the video feed.
+- Click **Stop** to end detection.
+   - Uses your trained model at `runs/segment/biscuit_yolov8n_seg/weights/best.pt` by default. Update the path in `app/main.py` if needed.
+
+### ONNX Runtime UI (No PyTorch Required)
+```
+python app/main_onnx.py
+```
+- Uses the exported ONNX model at `runs/segment/runs/segment/biscuit_yolov8n_seg/weights/best.onnx`.
+- Useful if you cannot use PyTorch (e.g., DLL issues), but mask overlay may require tuning for perfect alignment.
+
+## Troubleshooting
+- If you get DLL errors with PyTorch, ensure you have the latest Microsoft Visual C++ Redistributable (x64) installed and only one version present.
+- If using ONNX UI, mask overlay may need adjustment depending on your camera resolution and model export settings.
+- For missing packages, activate your environment and run `pip install -r requirements.txt`.
+- For more help, open an issue or contact the maintainer.
 
 ## Troubleshooting
 - If training does not improve, check your dataset and annotations.
@@ -60,6 +83,7 @@ Pull requests are welcome! Please open an issue first to discuss major changes.
 - `biscuit_crack.yaml`: Dataset config
 - `train_yolov8_seg.py`: Training script
 - `env-biscuits-crack/`: Virtual environment (do not commit)
+- `app/main.py`: PyQt5 real-time UI for live crack detection
 
 ## License
 MIT
