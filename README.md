@@ -46,6 +46,16 @@ results = model.predict('path/to/image.jpg', save=True)
     - **Recall**: 0.636
     - **mAP50**: 0.727
 
+## Sample Detection Gallery
+
+Below are some examples of the model detecting surface cracks on biscuits. The cracks are highlighted with a red segmentation mask and a solid red outline.
+
+| Original Image | Detection Result | Description |
+| :---: | :---: | :--- |
+| ![Sample 1 Original](samples/sample_1.jpg) | ![Sample 1 Detected](samples/sample_1_detected.jpg) | Fine linear crack detected across the center. |
+| ![Sample 2 Original](samples/sample_2.jpg) | ![Sample 2 Detected](samples/sample_2_detected.jpg) | Multiple small surface irregularities identified. |
+| ![Sample 3 Original](samples/sample_3.jpg) | ![Sample 3 Detected](samples/sample_3_detected.jpg) | Deep structural crack clearly segmented in red. |
+
 - This will save prediction images with crack masks in the `runs/segment/predict/` folder.
 
 #### Predict on Video (Live Camera)
