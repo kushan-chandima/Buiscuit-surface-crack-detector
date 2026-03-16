@@ -1,6 +1,6 @@
-# Biscuit Surface Crack Detector
+# Biscuit Surface Crack Detector Pro
 
-This project uses YOLOv8-seg for real-time biscuit crack detection and segmentation.
+**Biscuit Crack Detector Pro** is a high-performance industrial inspection tool that utilizes deep learning segmentation to identify and visualize surface defects on biscuits in real-time.
 
 ## Setup
 
