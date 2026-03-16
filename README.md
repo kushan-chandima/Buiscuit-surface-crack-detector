@@ -6,9 +6,9 @@ This project uses YOLOv8-seg for real-time biscuit crack detection and segmentat
 
 1. Create and activate the virtual environment:
    ```
-   python -m venv env-biscuits-crack
+   python -m venv env-test-biscuit
    # On Windows PowerShell:
-   .\env-biscuits-crack\Scripts\Activate.ps1
+   .\env-test-biscuit\Scripts\Activate.ps1
    ```
 2. Install dependencies:
    ```
@@ -47,42 +47,34 @@ model.predict(source=0, show=True)  # 0 = default webcam
 
 ## Real-Time UI Usage
 
-You can run the user-friendly UI for live crack detection:
+The project features a **Biscuit Crack Detector Pro** interface with a modern dark theme and real-time visual feedback.
 
-### PyTorch/Ultralytics UI
+### Launching the UI
 ```
 python app/main.py
 ```
-- Select your camera from the dropdown.
-- Click **Start** to begin live detection. Cracks will be highlighted in red on the video feed.
-- Click **Stop** to end detection.
-   - Uses your trained model at `runs/segment/biscuit_yolov8n_seg/weights/best.pt` by default. Update the path in `app/main.py` if needed.
-
-### ONNX Runtime UI (No PyTorch Required)
-```
-python app/main_onnx.py
-```
-- Uses the exported ONNX model at `runs/segment/runs/segment/biscuit_yolov8n_seg/weights/best.onnx`.
-- Useful if you cannot use PyTorch (e.g., DLL issues), but mask overlay may require tuning for perfect alignment.
+- **Pro UI Features**:
+    - **Dark Theme**: Professional high-contrast interface.
+    - **Sidebar Controls**: Easy camera selection and live detection toggle.
+    - **Result Indicator**: Real-time status box (Green: OK, Red: CRACK DETECTED).
+    - **Segmentation Overlay**: Direct crack highlighting on the video feed.
+- **Model Path**: Uses your trained model at `runs/segment/runs/segment/biscuit_yolov8n_seg/weights/best.pt` by default.
 
 ## Troubleshooting
-- If you get DLL errors with PyTorch, ensure you have the latest Microsoft Visual C++ Redistributable (x64) installed and only one version present.
-- For missing packages, activate your environment and run `pip install -r requirements.txt`.
-- For more help, open an issue or contact the maintainer.
-
-## Troubleshooting
-- If training does not improve, check your dataset and annotations.
-- For missing packages, activate your environment and run `pip install -r requirements.txt`.
-- For more help, open an issue or contact the maintainer.
+- **DLL Errors (PyTorch)**: If you encounter `WinError 1114`, ensure the import order in `app/main.py` prioritizes `torch` before `PyQt5`.
+- **Camera Not Found**: If the camera feed doesn't start, try indices 0, 1, or 2 in the dropdown.
+- **Missing Packages**: Activate your environment (`env-test-biscuit`) and run `pip install -r requirements.txt`.
 
 ## Contributing
+Pull requests are welcome! Please open an issue first to discuss major changes.
 Pull requests are welcome! Please open an issue first to discuss major changes.
 
 ## Files
 - `biscuit_crack.yaml`: Dataset config
 - `train_yolov8_seg.py`: Training script
-- `env-biscuits-crack/`: Virtual environment (do not commit)
-- `app/main.py`: PyQt5 real-time UI for live crack detection
+- `env-test-biscuit/`: Virtual environment
+- `app/main.py`: PyQt5 Real-time UI Pro for live crack detection
+- `test_both.py`, `test_pyqt5.py`, `test_ultralytics.py`: Diagnostic tools
 
 ## License
 MIT
