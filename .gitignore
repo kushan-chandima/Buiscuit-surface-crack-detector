@@ -6,6 +6,7 @@ __pycache__/
 
 # Virtual environment
 env-biscuits-crack/
+env-test-biscuit/
 
 # Data and model files
 runs/
