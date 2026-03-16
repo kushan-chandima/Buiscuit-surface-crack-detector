@@ -47,6 +47,8 @@ model.predict(source=0, show=True)  # 0 = default webcam
 
 ## Real-Time UI Usage
 
+![UI Preview](ui_preview.png)
+
 The project features a **Biscuit Crack Detector Pro** interface with a modern dark theme and real-time visual feedback.
 
 ### Launching the UI
