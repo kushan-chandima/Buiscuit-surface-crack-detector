@@ -1,68 +1,99 @@
 # Biscuit Surface Crack Detector
 
-This project uses YOLOv8-seg for real-time biscuit crack detection and segmentation. It features a user-friendly PyQt5 interface for live monitoring and automated crack identification.
-
-![Interface Preview](ui_preview.png)
-
-## Features
-- **Real-time segmentation**: Accurately outlines cracks on moving biscuits.
-- **Dual Engine Support**: Run with PyTorch (recommended) or ONNX Runtime.
-- **Visual Feedback**: Direct red-highlighted overlays for clear crack identification.
-
-## Detection Results
-Below are sample results showing the segmentation accuracy on various biscuit types:
-
-| Original Image | Detection Result |
-| :---: | :---: |
-| ![Original 1](samples/sample_1.jpg) | ![Detected 1](samples/sample_1_detected.jpg) |
-| ![Original 2](samples/sample_2.jpg) | ![Detected 2](samples/sample_2_detected.jpg) |
-| ![Original 3](samples/sample_3.jpg) | ![Detected 3](samples/sample_3_detected.jpg) |
+This project uses YOLOv8-seg for real-time biscuit crack detection and segmentation.
 
 ## Setup
 
 1. Create and activate the virtual environment:
    ```bash
    python -m venv env-biscuits-crack
+   
    # On Windows PowerShell:
    .\env-biscuits-crack\Scripts\Activate.ps1
+   
+   # On Linux Ubuntu/macOS:
+   source env-biscuits-crack/bin/activate
    ```
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
+   
+   *Note for Ubuntu/Linux users: If you encounter errors related to OpenCV or PyQt5, you may need to install system dependencies first:*
+   ```bash
+   sudo apt-get update
+   sudo apt-get install libgl1 libglib2.0-0 libxcb-xinerama0
+   ```
 
-## Usage
+## Training
 
-### Real-Time UI (Recommended)
-```bash
-python app/main.py
+1. Organize your dataset as described in `biscuit_crack.yaml`.
+2. Run the training script:
+   ```
+   python train_yolov8_seg.py
+   ```
+
+## Inference and UI
+
+### Inference (Prediction)
+
+After training, you can use your best model to predict cracks on new images or video streams.
+
+#### Predict on Images
 ```
-- Select your camera from the dropdown.
-- Click **Start** to begin live detection.
-- Cracks will be highlighted in **red** on the video feed.
-
-### Command Line Inference
-```python
 from ultralytics import YOLO
 
 model = YOLO('runs/segment/biscuit_yolov8n_seg/weights/best.pt')
 results = model.predict('path/to/image.jpg', save=True)
-# Results saved to runs/segment/predict/
 ```
+- This will save prediction images with crack masks in the `runs/segment/predict/` folder.
 
-## Training
-1. Organize your dataset as described in `biscuit_crack.yaml`.
-2. Run the training script:
-   ```bash
-   python train_yolov8_seg.py
-   ```
+#### Predict on Video (Live Camera)
+```
+model.predict(source=0, show=True)  # 0 = default webcam
+```
+- Use `source=1`, `2`, etc. for other connected cameras.
+
+
+## Real-Time UI Usage
+
+You can run the user-friendly UI for live crack detection using either the PyTorch (Ultralytics) or ONNX version:
+
+### PyTorch/Ultralytics UI (Recommended)
+```
+python app/main.py
+```
+- Select your camera from the dropdown.
+- Click **Start** to begin live detection. Cracks will be highlighted in red on the video feed.
+- Click **Stop** to end detection.
+   - Uses your trained model at `runs/segment/biscuit_yolov8n_seg/weights/best.pt` by default. Update the path in `app/main.py` if needed.
+
+### ONNX Runtime UI (No PyTorch Required)
+```
+python app/main_onnx.py
+```
+- Uses the exported ONNX model at `runs/segment/runs/segment/biscuit_yolov8n_seg/weights/best.onnx`.
+- Useful if you cannot use PyTorch (e.g., DLL issues), but mask overlay may require tuning for perfect alignment.
 
 ## Troubleshooting
-- **DLL Errors**: If you encounter DLL issues with PyTorch on Windows, ensure you have the [latest Microsoft Visual C++ Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) installed.
-- **Performance**: For systems without a GPU, use the ONNX version with `python app/main_onnx.py`.
+- If you get DLL errors with PyTorch, ensure you have the latest Microsoft Visual C++ Redistributable (x64) installed and only one version present.
+- If using ONNX UI, mask overlay may need adjustment depending on your camera resolution and model export settings.
+- For missing packages, activate your environment and run `pip install -r requirements.txt`.
+- For more help, open an issue or contact the maintainer.
+
+## Troubleshooting
+- If training does not improve, check your dataset and annotations.
+- For missing packages, activate your environment and run `pip install -r requirements.txt`.
+- For more help, open an issue or contact the maintainer.
 
 ## Contributing
-Pull requests are welcome! For major changes, please open an issue first.
+Pull requests are welcome! Please open an issue first to discuss major changes.
+
+## Files
+- `biscuit_crack.yaml`: Dataset config
+- `train_yolov8_seg.py`: Training script
+- `env-biscuits-crack/`: Virtual environment (do not commit)
+- `app/main.py`: PyQt5 real-time UI for live crack detection
 
 ## License
 MIT
