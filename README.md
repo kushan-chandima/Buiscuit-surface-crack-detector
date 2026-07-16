@@ -6,12 +6,13 @@ This project uses YOLOv8-seg for real-time biscuit crack detection and segmentat
 
 1. Create and activate the virtual environment:
    ```bash
-   python -m venv env-biscuits-crack
-   
    # On Windows PowerShell:
+   python -m venv env-biscuits-crack
    .\env-biscuits-crack\Scripts\Activate.ps1
    
    # On Linux Ubuntu/macOS:
+   # (Note: You may need to run `sudo apt install python3-venv` first on Ubuntu)
+   python3 -m venv env-biscuits-crack
    source env-biscuits-crack/bin/activate
    ```
 2. Install dependencies:
