@@ -4,26 +4,37 @@ This project uses YOLOv8-seg for real-time biscuit crack detection and segmentat
 
 ## Setup
 
+### Windows Setup
+
 1. Create and activate the virtual environment:
-   ```bash
-   # On Windows PowerShell:
+   ```powershell
    python -m venv env-biscuits-crack
    .\env-biscuits-crack\Scripts\Activate.ps1
-   
-   # On Linux Ubuntu/macOS:
-   # (Note: You may need to run `sudo apt install python3-venv` first on Ubuntu)
+   ```
+2. Install dependencies:
+   ```powershell
+   pip install -r requirements.txt
+   ```
+
+### Linux (Ubuntu) / macOS Setup
+
+1. Install the virtual environment package (Ubuntu only):
+   ```bash
+   sudo apt update
+   sudo apt install python3-venv
+   ```
+2. Create and activate a virtual environment:
+   ```bash
    python3 -m venv env-biscuits-crack
    source env-biscuits-crack/bin/activate
    ```
-2. Install dependencies:
+3. Install Python dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-   
-   *Note for Ubuntu/Linux users: If you encounter errors related to OpenCV or PyQt5, you may need to install system dependencies first:*
+4. Install system dependencies (Required for OpenCV and PyQt5 on Ubuntu):
    ```bash
-   sudo apt-get update
-   sudo apt-get install libgl1 libglib2.0-0 libxcb-xinerama0
+   sudo apt install libgl1 libglib2.0-0 libxcb-xinerama0
    ```
 
 ## Training
